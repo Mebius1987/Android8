@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class hw9 {
 
 public static void main(String[] args) {
-    task16();
-
+    task17();
 }
 
 public static void task1() {
@@ -424,6 +423,32 @@ public static void task16() {
         System.out.println("Chance that it could happen - " + (chance / chance2));
     }
 
+}
+
+public static void task17() {
+    int a = 20;
+    int start = -10;
+    int end = 20;
+    int ar[] = new int[a];
+    int count=0;
+    int posEnd =0;
+    int len =0;
+    for (int i = 0; i < a; i++) {
+        ar[i] = (int) (Math.random() * (end - start) + start);
+        if (ar[i] > 0 ) {
+            count++;
+        }
+        if (i>=a || ar[i]<=0 && i>0) {
+            if (count>len) {
+                len=count;
+                posEnd=i;
+            }
+            count=0;
+        }
+    }
+    
+    System.out.println("Array: " + Arrays.toString(ar));
+    System.out.println("Part: " + Arrays.toString(Arrays.copyOfRange(ar, posEnd-len, posEnd)));
 }
 
 }
