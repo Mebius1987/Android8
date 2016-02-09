@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class hw9 {
 
 public static void main(String[] args) {
-    task17();
+    task21();
 }
 
 public static void task1() {
@@ -430,25 +430,100 @@ public static void task17() {
     int start = -10;
     int end = 20;
     int ar[] = new int[a];
-    int count=0;
-    int posEnd =0;
-    int len =0;
+    int count = 0;
+    int posEnd = 0;
+    int len = 0;
     for (int i = 0; i < a; i++) {
         ar[i] = (int) (Math.random() * (end - start) + start);
-        if (ar[i] > 0 ) {
+        if (ar[i] > 0) {
             count++;
         }
-        if (i>=a || ar[i]<=0 && i>0) {
-            if (count>len) {
-                len=count;
-                posEnd=i;
+        if (i >= a || ar[i] <= 0 && i > 0) {
+            if (count > len) {
+                len = count;
+                posEnd = i;
             }
-            count=0;
+            count = 0;
         }
     }
-    
+
     System.out.println("Array: " + Arrays.toString(ar));
-    System.out.println("Part: " + Arrays.toString(Arrays.copyOfRange(ar, posEnd-len, posEnd)));
+    System.out.println("Part: " + Arrays.toString(Arrays.copyOfRange(ar, posEnd - len, posEnd)));
 }
 
+public static void task18() {
+    int a = 10;
+    double ar[] = {1, 1.1, 2, 2.2, 3, 3.3, 4, 4.4, 5, 5.5};
+    double arNew[] = new double[a];
+    int count = 0;
+    for (int i = 0; i < a; i++) {
+        if ((int) ar[i] != ar[i]) {
+            arNew[count] = ar[i];
+            count++;
+        }
+    }
+    for (int i = 0; i < a; i++) {
+        if ((int) ar[i] == ar[i]) {
+            arNew[count] = ar[i];
+            count++;
+        }
+    }
+    System.out.println("Array: " + Arrays.toString(ar));
+    System.out.println("Sorted Array: " + Arrays.toString(arNew));
 }
+
+public static void task19() {
+    int a = 10;
+    int start = 0;
+    int end = 100;
+    int ar[] = new int[a];
+    int sum = 0;
+    int avrg, foundI = 0;
+    int deltaI, delta = end - start;
+    for (int i = 0; i < a; i++) {
+        ar[i] = (int) (Math.random() * (end - start) + start);
+        sum += ar[i];
+    }
+    avrg = sum / a;
+    for (int i = 0; i < a; i++) {
+        deltaI = ar[i] - avrg;
+        if (deltaI < 0) {
+            deltaI *= -1;
+        }
+        if (delta > deltaI) {
+            delta = deltaI;
+            foundI = i;
+        }
+    }
+    System.out.println("Array: " + Arrays.toString(ar));
+    System.out.println("Averege number: " + avrg);
+    System.out.println("Closest to the averege: " + ar[foundI]);
+}
+
+public static void task20() {
+    int ar[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int n = 3; // 
+    boolean dir = false; // "true" - to the left, "false" - to the right
+    System.out.println("Array: " + Arrays.toString(ar));
+    int arLen=ar.length;
+    n = dir ? n%arLen : arLen-n%arLen;
+    int ar1[]=new int[arLen];
+    System.arraycopy(ar, 0, ar1, n, arLen-n);
+    System.arraycopy(ar, arLen-n, ar1, 0,n);
+    ar=ar1;
+    System.out.println("Array: " + Arrays.toString(ar));
+}
+
+public static void task21() {
+    int dec[]={1000,500,100,50,10,5,1};
+    String rome[]={"M", "D", "C", "L", "X", "V", "I"};
+    String romNum ="";
+    //for (int i=1;i)
+    
+}
+}
+
+
+
+//0123456789
+//7890123456
