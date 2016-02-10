@@ -570,7 +570,7 @@ public static void task22() {
     String strNum = "";
     int padej = 2;
 
-    int num = 11102341;  // ��� ����� "������������"
+    int num = 11102341;  // число для "озвучки"
     int powNum;
     for (int pow = powAr.length - 1; pow >= 0; pow--) {
         powNum = num / powAr[pow];
