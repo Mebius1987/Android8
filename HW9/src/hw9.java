@@ -584,5 +584,38 @@ public static void task22() {
   }
   System.out.println(strNum);
 }
+
+public static void task23() {
+	int n = 4;
+  	String str="1";
+  	String strNew;
+  	String prev;
+  	int count;
+  for(int i=0;i<n;i++){
+    prev=str.substring(0,1);
+    count=0;
+    strNew="";
+    for(int j=0;j<str.length();j++){
+      
+      if (!prev.equals(str.substring(j,j+1))) {
+      	strNew+=count+prev;
+      	count=0;
+        prev=str.substring(j,j+1);
+      } else {
+        count++;
+      }
+      
+      if (j==str.length()-1) {
+        count++;
+      	strNew+=count+prev;
+      }
+      
+    }
+    str=strNew;
+    System.out.println(str);
+  }
+  System.out.println(str);
+}
+
 }
 
