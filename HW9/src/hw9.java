@@ -515,15 +515,32 @@ public static void task20() {
 }
 
 public static void task21() {
-    int dec[]={1000,500,100,50,10,5,1};
+ int dec[]={1000,500,100,50,10,5,1};
     String rome[]={"M", "D", "C", "L", "X", "V", "I"};
-    String romNum ="";
-    //for (int i=1;i)
+    String romNum ="", romNumPow ="";
+    int from =1;
+  	int to = 4000; // excluded
+  	int num, pow;
+  	String romNumAr[]=new String[to-from];
+  	int arI=0;
+  for(int i=from;i<to;i++) {
+  	num=i;
+    romNum ="";
+    for(int j=1-rome.length%2;j<rome.length;j+=2){
+    	romNumPow="";
+      	pow=num/dec[j];
+      	num%=dec[j];
+    	if(pow>0 && pow<4) for(int l=1;l<=pow;l++) romNumPow+=rome[j];
+        if(pow==4 || pow==9) romNumPow+=rome[j];
+        if(pow>3 && pow<9) romNumPow+=rome[j-1];
+        if(pow>5 && pow<9)	for(int l=1;l<=pow-5;l++) romNumPow+=rome[j];
+        if(pow==9) romNumPow+=rome[j-2];
+        romNum+=romNumPow;
+    }
+    System.out.println(i + " - " + romNum);
+    romNumAr[arI++]=romNum;
+  }
     
 }
 }
 
-
-
-//0123456789
-//7890123456
