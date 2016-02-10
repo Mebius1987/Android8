@@ -100,7 +100,7 @@ public class JavaFX extends Application {
                 maze[y][x] = GameObject.HALL; // изначально, лабиринт пустой
 
                 // в 1 случае из 5 - ставим стену
-                if (r.nextInt(2) == 0) {
+                if (r.nextInt(5) == 0) {
                     maze[y][x] = GameObject.WALL;
                 }
 
