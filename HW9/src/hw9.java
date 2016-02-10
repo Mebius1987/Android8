@@ -542,5 +542,47 @@ public static void task21() {
   }
     
 }
+
+public static void task22() {
+  int powAr[] = {1,1000,1000000};
+  int powGender[] = {1,0,1}; // 1 - male, 0 - female
+  String powStr[][] = {{"бакинский","бача","бачей"},{"тысяча","тысячи","тысяч"},{"миллион","миллиона","миллионов"}};
+  String str_1_2[][] = {{"одна","один"},{"две","два"}};
+  String str_3_19[] = {"три","четыре","пять","шесть","семь","восемь","девять","десять",
+                       "одинадцать","двенадцать","тринадцать","четырнадцать","пятнадцать","шестнадцать","семнадцать",
+                       "восемнадцать","девятнадцать"};
+  String str_20_90[] = {"двадцать","тридцать","сорок","пятьдесят","шестьдесят","семьдесят","восемьдесят","девяносто"};
+  String str_100_900[] = {"сто","двести","триста","четыреста","пятьсот","шестьсот","семьсот","восемсот","девятьсот"};
+  
+  String strNum="";
+  int padej=2;
+  
+  int num = 11102341;  // это число "озвучивается"
+  int powNum;
+  for(int pow=powAr.length-1;pow>=0;pow--) {
+  	powNum=num/powAr[pow];
+    if (powNum>=100){
+    	strNum+= str_100_900[powNum/100-1]+" ";
+      	powNum%=100;
+      	padej=2;
+    }
+    if (powNum>=20){
+    	strNum+= str_20_90[powNum/10-2]+" ";
+      	powNum%=10;
+      	padej=2;
+    }
+    if (powNum>=3){
+    	strNum+= str_3_19[powNum-3]+" ";
+      	if (powNum==3 || powNum==4) padej=1; else padej=2;
+    }
+    if (powNum==1 || powNum==2){
+    	strNum+= str_1_2[powNum-1][powGender[pow]]+" ";
+      	if (powNum==1) padej=0; else padej=1;
+    }
+    if (num/powAr[pow]>0) strNum+=powStr[pow][padej]+" ";
+    num%=powAr[pow];
+  }
+  System.out.println(strNum);
+}
 }
 
