@@ -639,15 +639,15 @@ public class hw9 {
     public static void task24() {
         double avgMax[] = {2.2, 2.7, 6.6, 13, 19.5, 24, 27, 26.5, 21, 15, 8.4, 3.7, 14.1};
         double avgMin[] = {-2.8, -2.6, 1, 6.6, 12.1, 16.3, 18.5, 18.2, 13.5, 8.6, 3.2, -1.2, 7.6};
-        double max=0;
-        double min=0;
-        for(int i=0; i<avgMax.length; i++) {
-            max+=avgMax[i];
-            min+=avgMin[i];
+        double max = 0;
+        double min = 0;
+        for (int i = 0; i < avgMax.length; i++) {
+            max += avgMax[i];
+            min += avgMin[i];
         }
-        System.out.format("Averege max temp %.2f%n", max/avgMax.length);
-        System.out.format("Averege min temp %.2f%n", min/avgMin.length);
-        System.out.format("Averege temp %.2f%n", (max+min)/(avgMax.length + avgMin.length));
+        System.out.format("Averege max temp %.2f%n", max / avgMax.length);
+        System.out.format("Averege min temp %.2f%n", min / avgMin.length);
+        System.out.format("Averege temp %.2f%n", (max + min) / (avgMax.length + avgMin.length));
     }
 
 }
