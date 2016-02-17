@@ -10,7 +10,7 @@ public class hw8 {
 	}
 	
 	public static void task1() { 
-		
+
 	}
 	
 	
