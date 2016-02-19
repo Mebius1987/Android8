@@ -2,7 +2,7 @@
 public class hw8 {
 
     public static void main(String[] args) {
-        task10();
+       task10();
     }
 
     public static void task1() {
@@ -74,28 +74,26 @@ public class hw8 {
 
     public static void task9() {
         int a = 0;
-        int b =0;
+        int b = 0;
         int c = 0;
         int from = 1;
         int to = 32;
         for (int i = 0; i < 3; i++) {
-            b=(int)(Math.random()*(to+1-from)+from);
+            b = (int) (Math.random() * (to + 1 - from) + from);
             System.out.println("Bit " + b);
-            c=1<<(b-1);
-            a|=c;
+            c = 1 << (b - 1);
+            a |= c;
         }
         System.out.println("New value - " + a);
     }
 
-     public static void task10() {
+    public static void task10() {
         short a = 11;
         short b = 25;
-        int c=0;
-        c=c|a;
-        c=(c<<16)|b;
-        System.out.println("a - " + (short)(c>>16) );
-        System.out.println("b - " + (short)c );
+        int c = 0;
+        c = c | a;
+        c = (c << 16) | b;
+        System.out.println("a - " + (short) (c >> 16));
+        System.out.println("b - " + (short) c);
     }
-    
-    
 }
