@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class hw10 {
 
     public static void main(String[] args) {
-        task8();
+        task12();
     }
 
     public static void task1() {
@@ -200,7 +200,7 @@ public class hw10 {
     }
 
     public static void task8() {
-        int rows = 5;
+        int rows = 10;
         int colmns = rows;
         int ar[][] = new int[rows][colmns];
         int step = 1;
@@ -214,12 +214,25 @@ public class hw10 {
 
         while (count <= rows * colmns) {
             ar[y][x] = count;
-            System.out.println("Count - " + count + " x-" + x + " y-" + y + " i-"+i);
             if (axis == "x") {
-                if (i<step) {x+=dirX;} else {axis="y";i=0;dirX*=-1;}
+                if (i < step) {
+                    x += dirX;
+                } else {
+                    axis = "y";
+                    i = 0;
+                    dirX *= -1;
+                }
             }
             if (axis == "y") {
-                if (i<step) {y+=dirY;} else {axis="x";i=0;dirY*=-1;step++;}
+                if (i < step) {
+                    y += dirY;
+                } else {
+                    x += dirX;
+                    axis = "x";
+                    i = 0;
+                    dirY *= -1;
+                    step++;
+                }
             }
             i++;
             count++;
@@ -227,4 +240,86 @@ public class hw10 {
         System.out.println(Arrays.deepToString(ar));
     }
 
+    public static void task9() { // ==========================================================================================
+        int rows = 5;
+        int colmns = rows;
+        int ar[][] = new int[rows][colmns];
+        int step = rows;
+        int x = 0;
+        int y = 0;
+        int dirX = 1;
+        int dirY = 0;
+        int count = 1;
+
+        while (count <= rows * colmns) {
+            ar[y][x] = count;
+            count++;
+            x+=dirX;
+            y+=dirY;
+            
+        }
+        System.out.println(Arrays.deepToString(ar));
+    }
+
+    public static void task10() {
+        int rows = 5;
+        int colmns = 6;
+        int ar[][] = new int[rows][colmns];
+        int num = 0;
+
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < colmns; x++) {
+                num++;
+                ar[y][x] = num;
+            }
+        }
+        System.out.println(Arrays.deepToString(ar));
+    }
+
+    public static void task11() {
+        int rows = 5;
+        int colmns = 6;
+        int ar[][] = new int[rows][colmns];
+        int num = 0;
+
+        for (int y = 0; y < rows; y++) {
+            for (int x = (y % 2 == 1) ? colmns - 1 : 0; (x < colmns) && (x >= 0); x = x + ((y % 2 == 1) ? -1 : 1)) {
+                num++;
+                ar[y][x] = num;
+            }
+        }
+        System.out.println(Arrays.deepToString(ar));
+    }
+
+    public static void task12() {
+        int rows = 6;
+        int colmns = 10;
+        int ar[][] = new int[rows][colmns];
+        int count = 1;
+        int x = 0;
+        int y = 0;
+        int dirX = 1;
+        int dirY = 1;
+
+        while (count <= rows * colmns) {
+            if (ar[y][x] == 0) {
+                ar[y][x] = count;
+                count++;
+            }
+            if (x == 0) {
+                dirX = 1;
+            }
+            if (x == colmns - 1) {dirX=-1;}
+            if (y == 0) { dirY = 1;}
+            if (y == rows - 1){dirY=-1;}
+            if ((x == colmns - 1) && (y == rows - 1)) {
+                x = 0;
+                y = rows - 1;
+            } else {
+                x += dirX;
+                y += dirY;
+            }
+        }
+        System.out.println(Arrays.deepToString(ar));
+    }
 }
