@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class hw10 {
 
     public static void main(String[] args) {
-        task12();
+        task9();
     }
 
     public static void task1() {
@@ -240,38 +240,51 @@ public class hw10 {
         System.out.println(Arrays.deepToString(ar));
     }
 
-    public static void task9() { // ==========================================================================================
-        int rows = 5;
+    public static void task9() { 
+        int rows = 10;
         int colmns = rows;
         int ar[][] = new int[rows][colmns];
-        int step = rows;
+        int step = colmns - 1;
         int x = 0;
         int y = 0;
         int dirX = 1;
-        int dirY = 0;
+        int dirY = 1;
+        String axis = "x";
         int count = 1;
+        int i = 0;
 
         while (count <= rows * colmns) {
-            ar[y][x] = count;
-            count++;
-            x+=dirX;
-            y+=dirY;
-            
-        }
-        System.out.println(Arrays.deepToString(ar));
-    }
-
-    public static void task10() {
-        int rows = 5;
-        int colmns = 6;
-        int ar[][] = new int[rows][colmns];
-        int num = 0;
-
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < colmns; x++) {
-                num++;
-                ar[y][x] = num;
+            System.out.println("y=" + y + " x=" + x + " count=" + count);
+            if ((ar[y][x]!= 0) && (i==step)) {
+                step--;
+                i=1;
+                if (axis=="x"){dirX*=-1;axis="y";}
+                if (axis=="y"){dirY*=-1;axis="x";}
+                x+=dirX;
+                y+=dirY;
             }
+            ar[y][x] = count;
+            if (axis == "x") {
+                if (i < step) {
+                    x += dirX;
+                } else {
+                    axis = "y";
+                    i = 0;
+                    dirX *= -1;
+                }
+            }
+            if (axis == "y") {
+                if (i < step) {
+                    y += dirY;
+                } else {
+                    axis = "x";
+                    x += dirX;
+                    i = 0;
+                    dirY *= -1;
+                }
+            }
+            i++;
+            count++;
         }
         System.out.println(Arrays.deepToString(ar));
     }
@@ -309,9 +322,15 @@ public class hw10 {
             if (x == 0) {
                 dirX = 1;
             }
-            if (x == colmns - 1) {dirX=-1;}
-            if (y == 0) { dirY = 1;}
-            if (y == rows - 1){dirY=-1;}
+            if (x == colmns - 1) {
+                dirX = -1;
+            }
+            if (y == 0) {
+                dirY = 1;
+            }
+            if (y == rows - 1) {
+                dirY = -1;
+            }
             if ((x == colmns - 1) && (y == rows - 1)) {
                 x = 0;
                 y = rows - 1;
