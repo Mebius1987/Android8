@@ -1,10 +1,13 @@
 
 import java.util.Arrays;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class hw10 {
 
     public static void main(String[] args) {
-        task15();
+        task16();
     }
 
     public static void task1() {
@@ -388,64 +391,78 @@ public class hw10 {
         int m = 5;
         int n = 6;
         int ar2[][] = new int[m][n];
-        int ar1[] = new int[m*n];
-        int i=0;
+        int ar1[] = new int[m * n];
+        int i = 0;
         for (int y = 0; y < m; y++) {
-            for(int x=0;x<n;x++){
-                ar2[y][x]=i;
-                ar1[i]=ar2[y][x];
+            for (int x = 0; x < n; x++) {
+                ar2[y][x] = i;
+                ar1[i] = ar2[y][x];
                 i++;
             }
         }
-        i=0;
+        i = 0;
         for (int y = 0; y < m; y++) {
-            for(int x=0;x<n;x++){
-                ar2[y][x]=ar1[i];
+            for (int x = 0; x < n; x++) {
+                ar2[y][x] = ar1[i];
                 i++;
             }
         }
     }
-    
+
     public static void task15() {
         int m = 5;
         int n = 6;
-        int from=1;
-        int to=100;
-        int sumAll=0;
+        int from = 1;
+        int to = 100;
+        int sumAll = 0;
         int num;
         int ar[][] = new int[m][n];
         int sum[] = new int[m];
         int avrg[] = new int[m];
         for (int y = 0; y < m; y++) {
-            for(int x=0;x<n;x++){
-                num=(int)(Math.random()*(to+1-from)+from);
-                ar[y][x]=num;
-                sum[y]+=num;
-                sumAll+=num;
+            for (int x = 0; x < n; x++) {
+                num = (int) (Math.random() * (to + 1 - from) + from);
+                ar[y][x] = num;
+                sum[y] += num;
+                sumAll += num;
             }
-            avrg[y]=sum[y]/n;
+            avrg[y] = sum[y] / n;
         }
-        int avrgAll=sumAll/(m*n);
-        
-        int maxDelta=0;
-        int maxDeltaI=0;
+        int avrgAll = sumAll / (m * n);
+
+        int maxDelta = 0;
+        int maxDeltaI = 0;
         int delta;
-        for(int y=0;y<m;y++){
-            delta=avrg[y]-avrgAll;
-            if (delta<0)delta*=-1;
-            if (delta>maxDelta){
-                maxDelta=delta;
-                maxDeltaI=y;
+        for (int y = 0; y < m; y++) {
+            delta = avrg[y] - avrgAll;
+            if (delta < 0) {
+                delta *= -1;
+            }
+            if (delta > maxDelta) {
+                maxDelta = delta;
+                maxDeltaI = y;
             }
         }
-        System.out.println(Arrays.deepToString(ar));
-        System.out.println("avrg="+avrgAll);
-        System.out.println("avrgs="+Arrays.toString(avrg));
-        System.out.println("maxDeltaI="+maxDeltaI);
         System.out.println(Arrays.toString(ar[maxDeltaI]));
-        
     }
-    
-    
+
+    public static void task16() {
+        int m = 12;
+        int n = 20;
+        int sales[][] = new int[m][n];
+        Random rnd = new Random();
+        for (int y = 0; y < m; y++) {
+            for (int x = 0; x < n; x++) {
+                sales[y][x]=rnd.nextInt(2); // 0 or 1
+            }
+        }
+        int k=4;
+        String regex="(0,?\\s?){"+k+"}";
+        Pattern p = Pattern.compile(regex);  
+        String str=Arrays.deepToString(sales);
+        Matcher mcher = p.matcher(str);  
+        if (mcher.find()){System.out.println("Welcome");} else {System.out.println("Next time");}
+        System.out.println(str);
+    }
 
 }
