@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class hw10 {
 
     public static void main(String[] args) {
-        task16();
+        task17();
     }
 
     public static void task1() {
@@ -465,4 +465,28 @@ public class hw10 {
         System.out.println(str);
     }
 
+    public static void task17() {
+        int nominal[]={1,2,5,10,20,50,100,200,500};
+        int maxCount=40;// не более 40 банкнот
+        int sum=1250;
+        Random rnd=new Random();
+        int kasCount=4+rnd.nextInt(3);
+        int kasNominal[]=new int[kasCount];
+        int kasQuant[]=new int[kasCount];
+        
+        for (int i=0;i<kasCount;i++){
+            kasNominal[i]=rnd.nextInt(nominal.length);
+            kasQuant[i]=2000+rnd.nextInt(1001);
+        }
+        
+        int bounds[]=new int[kasCount];
+        for(int i=0;i<kasCount;){
+            bounds[i]=sum/kasNominal[i];
+            if (bounds[i]>kasQuant[i])bounds[i]=kasQuant[i];
+            if (bounds[i]>maxCount)bounds[i]=maxCount;
+        }
+        
+        
+    }
+    
 }
