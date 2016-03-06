@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class hw10 {
 
     public static void main(String[] args) {
-        task13();
+        task15();
     }
 
     public static void task1() {
@@ -240,7 +240,7 @@ public class hw10 {
         System.out.println(Arrays.deepToString(ar));
     }
 
-    public static void task9() { 
+    public static void task9() {
         int rows = 10;
         int colmns = rows;
         int ar[][] = new int[rows][colmns];
@@ -254,13 +254,19 @@ public class hw10 {
         int i = 0;
 
         while (count <= rows * colmns) {
-            if ((ar[y][x]!= 0) && (i==step)) {
+            if ((ar[y][x] != 0) && (i == step)) {
                 step--;
-                i=1;
-                if (axis=="x"){dirX*=-1;axis="y";}
-                if (axis=="y"){dirY*=-1;axis="x";}
-                x+=dirX;
-                y+=dirY;
+                i = 1;
+                if (axis == "x") {
+                    dirX *= -1;
+                    axis = "y";
+                }
+                if (axis == "y") {
+                    dirY *= -1;
+                    axis = "x";
+                }
+                x += dirX;
+                y += dirY;
             }
             ar[y][x] = count;
             if (axis == "x") {
@@ -294,14 +300,15 @@ public class hw10 {
         int ar[][] = new int[rows][colmns];
         int num = 0;
 
-        for(int y=0;y<rows;y++){
-            for(int x=0;x<colmns;x++){
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < colmns; x++) {
                 num++;
-                ar[y][x]=num;
+                ar[y][x] = num;
             }
         }
         System.out.println(Arrays.deepToString(ar));
     }
+
     public static void task11() {
         int rows = 5;
         int colmns = 6;
@@ -354,21 +361,21 @@ public class hw10 {
         }
         System.out.println(Arrays.deepToString(ar));
     }
-    
-    public static void task13(){
-        int n=10;
-        String str0=" ";
-        String str1="+";
+
+    public static void task13() {
+        int n = 10;
+        String str0 = " ";
+        String str1 = "+";
         String ar[][][] = new String[n][n][n];
-        int delta=0;
-        int center=n/2;
-        int rad=(n-1)/2;
-                
-        for (int z=0;z<n;z++){
-            for(int y=0;y<n;y++){
-                for(int x=0;x<n;x++){
-                    delta=(x-center)*(x-center)+(y-center)*(y-center)+(z-center)*(z-center);
-                    ar[z][y][x]= (delta<=rad*rad) ? str1 : str0;
+        int delta = 0;
+        int center = n / 2;
+        int rad = (n - 1) / 2;
+
+        for (int z = 0; z < n; z++) {
+            for (int y = 0; y < n; y++) {
+                for (int x = 0; x < n; x++) {
+                    delta = (x - center) * (x - center) + (y - center) * (y - center) + (z - center) * (z - center);
+                    ar[z][y][x] = (delta <= rad * rad) ? str1 : str0;
                     System.out.print(ar[z][y][x]);
                 }
                 System.out.println();
@@ -376,5 +383,69 @@ public class hw10 {
             System.out.println("_____________________________________");
         }
     }
+
+    public static void task14() {
+        int m = 5;
+        int n = 6;
+        int ar2[][] = new int[m][n];
+        int ar1[] = new int[m*n];
+        int i=0;
+        for (int y = 0; y < m; y++) {
+            for(int x=0;x<n;x++){
+                ar2[y][x]=i;
+                ar1[i]=ar2[y][x];
+                i++;
+            }
+        }
+        i=0;
+        for (int y = 0; y < m; y++) {
+            for(int x=0;x<n;x++){
+                ar2[y][x]=ar1[i];
+                i++;
+            }
+        }
+    }
     
+    public static void task15() {
+        int m = 5;
+        int n = 6;
+        int from=1;
+        int to=100;
+        int sumAll=0;
+        int num;
+        int ar[][] = new int[m][n];
+        int sum[] = new int[m];
+        int avrg[] = new int[m];
+        for (int y = 0; y < m; y++) {
+            for(int x=0;x<n;x++){
+                num=(int)(Math.random()*(to+1-from)+from);
+                ar[y][x]=num;
+                sum[y]+=num;
+                sumAll+=num;
+            }
+            avrg[y]=sum[y]/n;
+        }
+        int avrgAll=sumAll/(m*n);
+        
+        int maxDelta=0;
+        int maxDeltaI=0;
+        int delta;
+        for(int y=0;y<m;y++){
+            delta=avrg[y]-avrgAll;
+            if (delta<0)delta*=-1;
+            if (delta>maxDelta){
+                maxDelta=delta;
+                maxDeltaI=y;
+            }
+        }
+        System.out.println(Arrays.deepToString(ar));
+        System.out.println("avrg="+avrgAll);
+        System.out.println("avrgs="+Arrays.toString(avrg));
+        System.out.println("maxDeltaI="+maxDeltaI);
+        System.out.println(Arrays.toString(ar[maxDeltaI]));
+        
+    }
+    
+    
+
 }
