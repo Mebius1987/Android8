@@ -453,40 +453,97 @@ public class hw10 {
         Random rnd = new Random();
         for (int y = 0; y < m; y++) {
             for (int x = 0; x < n; x++) {
-                sales[y][x]=rnd.nextInt(2); // 0 or 1
+                sales[y][x] = rnd.nextInt(2); // 0 or 1
             }
         }
-        int k=4;
-        String regex="(0,?\\s?){"+k+"}";
-        Pattern p = Pattern.compile(regex);  
-        String str=Arrays.deepToString(sales);
-        Matcher mcher = p.matcher(str);  
-        if (mcher.find()){System.out.println("Welcome");} else {System.out.println("Next time");}
+        int k = 4;
+        String regex = "(0,?\\s?){" + k + "}";
+        Pattern p = Pattern.compile(regex);
+        String str = Arrays.deepToString(sales);
+        Matcher mcher = p.matcher(str);
+        if (mcher.find()) {
+            System.out.println("Welcome");
+        } else {
+            System.out.println("Next time");
+        }
         System.out.println(str);
     }
 
     public static void task17() {
-        int nominal[]={1,2,5,10,20,50,100,200,500};
-        int maxCount=40;// не более 40 банкнот
-        int sum=1250;
-        Random rnd=new Random();
-        int kasCount=4+rnd.nextInt(3);
-        int kasNominal[]=new int[kasCount];
-        int kasQuant[]=new int[kasCount];
-        
-        for (int i=0;i<kasCount;i++){
-            kasNominal[i]=rnd.nextInt(nominal.length);
-            kasQuant[i]=2000+rnd.nextInt(1001);
+        int nominal[] = {1, 2, 5, 10, 20, 50, 100, 200, 500};
+        int maxQuant = 40;// не более 40 банкнот
+        int sum = 1250; // сумма к выдаче
+        Random rnd = new Random();
+        int kasCount = 4 + rnd.nextInt(3);
+        int kasNominal[] = new int[kasCount];
+        int kasQuant[] = new int[kasCount];
+
+        for (int i = 0; i < kasCount; i++) {
+            kasNominal[i] = rnd.nextInt(nominal.length);
+            kasQuant[i] = 2000 + rnd.nextInt(1001);
         }
-        
-        int bounds[]=new int[kasCount];
-        for(int i=0;i<kasCount;){
-            bounds[i]=sum/kasNominal[i];
-            if (bounds[i]>kasQuant[i])bounds[i]=kasQuant[i];
-            if (bounds[i]>maxCount)bounds[i]=maxCount;
+
+        int maxKasQuant[] = new int[kasCount];
+        for (int i = 0; i < kasCount;) {
+            maxKasQuant[i] = sum / kasNominal[i];
         }
-        
-        
+
+        int outQuant[] = new int[kasCount];
+        int curKasQuant[] = new int[kasCount];
+        int minQuant = maxQuant + 1;
+        int curSum = 0;
+        int curQuant = 0;
+        boolean check = true;
+        boolean search = true;
+        while (search) {
+            curKasQuant[0]++;
+            for (int j = 0; j < kasCount; j++) {
+                if (check) {
+                    curSum = 0;
+                    curQuant = 0;
+                    for (int i = 0; i < kasCount; i++) {
+                        curSum += curKasQuant[i] * kasNominal[i];
+                        curQuant += curKasQuant[i];
+                    }
+                    if (curSum == sum && curQuant < minQuant) {
+                        minQuant = curQuant;
+                        outQuant = Arrays.copyOf(curKasQuant, kasCount);
+                    }
+                    check = false;
+                }
+                if ((curKasQuant[j] > maxQuant)
+                        || (curKasQuant[j] > maxKasQuant[j])
+                        || (curKasQuant[j] > kasQuant[j])
+                        || (curQuant > minQuant)
+                        || (curSum > sum)) {
+                    if (j < kasCount - 1) {
+                        curKasQuant[j] = 0;
+                        curKasQuant[j + 1]++;
+                    } else {
+                        search = false;
+                    }
+                    check = true;
+                }
+            }
+        }
+        System.out.println("Банкомат");
+        for (int i = 0; i < kasCount; i++) {
+            System.out.print("Кассета " + (i + 1) + " ");
+            System.out.print("Номинал " + kasNominal[i] + " ");
+            System.out.println("Доступно банкнот " + kasQuant[i] + " ");
+        }
+        System.out.println("Сумма к выдаче - " + sum);
+        if (minQuant > maxQuant) {
+            System.out.println("Выдать невозможно");
+        } else {
+            System.out.println("Выдано " + minQuant + " банкнот:");
+            for (int i = 0; i < kasCount; i++) {
+                if (kasNominal[i] > 0) {
+                    System.out.print("Банкнота " + kasNominal[i] + " ");
+                    System.out.print("Кол-во " + outQuant[i] + " ");
+                }
+            }
+        }
     }
-    
+
 }
