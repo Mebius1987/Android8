@@ -477,70 +477,77 @@ public class hw10 {
         int kasCount = 4 + rnd.nextInt(3);
         int kasNominal[] = new int[kasCount];
         int kasQuant[] = new int[kasCount];
-
+        // генерация кассет
         for (int i = 0; i < kasCount; i++) {
-            kasNominal[i] = rnd.nextInt(nominal.length);
+            kasNominal[i] = nominal[rnd.nextInt(nominal.length)];
             kasQuant[i] = 2000 + rnd.nextInt(1001);
         }
-
-        int maxKasQuant[] = new int[kasCount];
-        for (int i = 0; i < kasCount;) {
-            maxKasQuant[i] = sum / kasNominal[i];
-        }
-
-        int outQuant[] = new int[kasCount];
-        int curKasQuant[] = new int[kasCount];
-        int minQuant = maxQuant + 1;
-        int curSum = 0;
-        int curQuant = 0;
-        boolean check = true;
-        boolean search = true;
-        while (search) {
-            curKasQuant[0]++;
-            for (int j = 0; j < kasCount; j++) {
-                if (check) {
-                    curSum = 0;
-                    curQuant = 0;
-                    for (int i = 0; i < kasCount; i++) {
-                        curSum += curKasQuant[i] * kasNominal[i];
-                        curQuant += curKasQuant[i];
-                    }
-                    if (curSum == sum && curQuant < minQuant) {
-                        minQuant = curQuant;
-                        outQuant = Arrays.copyOf(curKasQuant, kasCount);
-                    }
-                    check = false;
-                }
-                if ((curKasQuant[j] > maxQuant)
-                        || (curKasQuant[j] > maxKasQuant[j])
-                        || (curKasQuant[j] > kasQuant[j])
-                        || (curQuant > minQuant)
-                        || (curSum > sum)) {
-                    if (j < kasCount - 1) {
-                        curKasQuant[j] = 0;
-                        curKasQuant[j + 1]++;
-                    } else {
-                        search = false;
-                    }
-                    check = true;
-                }
-            }
-        }
-        System.out.println("Банкомат");
+        // что имеем в банкомате
+        System.out.println("Банкомат:");
         for (int i = 0; i < kasCount; i++) {
             System.out.print("Кассета " + (i + 1) + " ");
             System.out.print("Номинал " + kasNominal[i] + " ");
             System.out.println("Доступно банкнот " + kasQuant[i] + " ");
         }
         System.out.println("Сумма к выдаче - " + sum);
+        System.out.println("");
+        // макс кол-во купюр каждого номинала кот. помещается в сумме выдачи
+        int maxKasQuant[] = new int[kasCount];
+        for (int i = 0; i < kasCount; i++) {
+            maxKasQuant[i] = sum / kasNominal[i];
+        }
+
+        int outQuant[] = new int[kasCount];
+        int curOutQuant[] = new int[kasCount];
+        int minQuant = maxQuant + 1;
+        int curSum = 0;
+        int curQuant = 0;
+        boolean check = true;
+        boolean search = true;
+        while (search) {
+            curOutQuant[0]++;
+            check = true;
+            for (int j = 0; j < kasCount; j++) {
+                // считаем сколько купюр и какая сумма для текущего варианта выдачи
+                if (check) {
+                    curSum = 0;
+                    curQuant = 0;
+                    for (int i = 0; i < kasCount; i++) {
+                        curSum += curOutQuant[i] * kasNominal[i];
+                        curQuant += curOutQuant[i];
+                    }
+                    // проверяем текущий вариант: оптимальный ли
+                    if (curSum == sum && curQuant < minQuant) {
+                        minQuant = curQuant;
+                        outQuant = Arrays.copyOf(curOutQuant, kasCount);
+                    }
+                    check = false;
+                }
+                // проверяем текущий вариант на валидность и делаем ротацию по кассетам
+                if ((curOutQuant[j] > maxQuant)
+                        || (curOutQuant[j] > maxKasQuant[j])
+                        || (curOutQuant[j] > kasQuant[j])
+                        || (curQuant > minQuant)
+                        || (curSum > sum)) {
+                    if (j == kasCount - 1) {
+                        search = false;
+                    } else {
+                        curOutQuant[j] = 0;
+                        curOutQuant[j + 1]++;
+                    }
+                    // если проверены все варианты и для последней кассеты, то завершаем поиск решений
+                    check = true;
+                }
+            }
+        }
         if (minQuant > maxQuant) {
             System.out.println("Выдать невозможно");
         } else {
             System.out.println("Выдано " + minQuant + " банкнот:");
             for (int i = 0; i < kasCount; i++) {
-                if (kasNominal[i] > 0) {
+                if (outQuant[i] > 0) {
                     System.out.print("Банкнота " + kasNominal[i] + " ");
-                    System.out.print("Кол-во " + outQuant[i] + " ");
+                    System.out.println("Кол-во " + outQuant[i] + " ");
                 }
             }
         }
