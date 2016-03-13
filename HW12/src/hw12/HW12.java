@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class HW12 {
 
     public static void main(String[] args) {
-        task3();
+        task4();
     }
 
     public static void task1() {
