@@ -1,6 +1,5 @@
 package hw13;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,7 +7,7 @@ import java.util.Scanner;
 public class HW13 {
 
     public static void main(String[] args) {
-        task11();
+        task10();
     }
 
     public static void myLine(int quant, char symb, boolean horizontal) {
