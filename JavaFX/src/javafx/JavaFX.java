@@ -1,4 +1,5 @@
 package javafx;
+import java.nio.file.Paths;
 import javafx.scene.input.KeyEvent;
 import java.util.Random;
 import javafx.application.*;
@@ -8,6 +9,8 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.geometry.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class JavaFX extends Application {
 
@@ -20,7 +23,16 @@ public class JavaFX extends Application {
         options(primaryStage); // первоначальные настройки приложения
         generateMaze(); // создание лабиринта
         showMaze(); // показ лабиринта
+        sound();
         gameProcess(); // начало игрового процесса (управление стрелками и тд.)
+    }
+    
+    
+    public void sound() {
+     String bip = Paths.get("/Downloads/bip.mp3").toUri().toString();
+        Media hit = new Media(bip);
+        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.play();
     }
     
  //kk
