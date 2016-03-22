@@ -277,7 +277,7 @@ public class HW13 {
     public static void task11() {
         double num = 10.4556787546;
         int pow=4;
-        String str="Num - %."+ pow +"f\n";
-        System.out.format(str,myRound(num,pow));
+        String outString="Num - %."+ pow +"f\n";
+        System.out.format(outString,myRound(num,pow));
     }
 }
