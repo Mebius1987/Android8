@@ -5,14 +5,14 @@
  */
 package hw15;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -20,15 +20,20 @@ import javafx.stage.Stage;
  * @author Valik
  */
 public class HW15 extends Application {
-    
+
     @Override
-    public void start(Stage primaryStage) {
-               
+    public void start(Stage primaryStage) throws IOException {
+        URL url = getClass().getResource("sample.fxml");
+        Parent root = FXMLLoader.load(url);
+
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+// вариант получения полного пути к файлу. Но у этой приблуды есть свои особенности, нужно тестировать.
+        String filePath = Paths.get("/Downloads/bip.mp3").toUri().toString();
+
+        Music music = new Music(filePath);
         
-        String bip = "bip.mp3";
-        Media hit = new Media(bip);
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
     }
 
     /**
@@ -37,5 +42,5 @@ public class HW15 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
