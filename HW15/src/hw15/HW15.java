@@ -33,7 +33,7 @@ public class HW15 extends Application {
         String filePath = Paths.get("/Downloads/bip.mp3").toUri().toString();
 
         Music music = new Music(filePath);
-        
+        music.play();
     }
 
     /**
