@@ -6,6 +6,7 @@
 package hw15;
 
 import java.io.File;
+import javafx.scene.control.Slider;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -30,10 +31,12 @@ public class HW15 extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 // вариант получения полного пути к файлу. Но у этой приблуды есть свои особенности, нужно тестировать.
-        String filePath = Paths.get("/Downloads/bip.mp3").toUri().toString();
+        String filePath = Paths.get("C:\\Java\\IDEA\\HW15\\HW15\\src\\bip.mp3").toUri().toString();
 
         Music music = new Music(filePath);
         music.play();
+
+
     }
 
     /**

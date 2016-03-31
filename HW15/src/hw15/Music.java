@@ -31,7 +31,7 @@ class Music {
         public void run() {
             System.out.println("Duration: "+audio.getDuration().toSeconds());
             // display media's metadata
-            for (Map.Entry<String, Object> entry : audio.getMetadata().entrySet()){
+        for (Map.Entry<String, Object> entry : audio.getMetadata().entrySet()){
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
         }
