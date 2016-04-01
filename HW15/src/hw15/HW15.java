@@ -5,8 +5,6 @@
  */
 package hw15;
 
-import java.io.File;
-import javafx.scene.control.Slider;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -22,21 +20,30 @@ import javafx.stage.Stage;
  */
 public class HW15 extends Application {
 
+    public int i = 0;
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
         URL url = getClass().getResource("sample.fxml");
         Parent root = FXMLLoader.load(url);
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("MP3 Player");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-// вариант получения полного пути к файлу. Но у этой приблуды есть свои особенности, нужно тестировать.
-        String filePath = Paths.get("C:\\Java\\IDEA\\HW15\\HW15\\src\\bip.mp3").toUri().toString();
-
+        
+        // вариант получения полного пути к файлу.
+        String[] songs = {
+            "Beating-Around-The-Bush.mp3", 
+            "Hells-Bells.mp3.mp3", 
+            "Highway-To-Hell.mp3", 
+            "T.N.T.mp3", 
+            "Thunderstruck.mp3"
+        };
+        
+        String filePath = Paths.get("C:\\Java\\IDEA\\HW15\\HW15\\src\\mp3\\" + songs[4]).toUri().toString();
+        
         Music music = new Music(filePath);
         music.play();
-
-
     }
 
     /**
